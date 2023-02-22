@@ -1,0 +1,42 @@
+<!--
+ - Created by sankalp.jhingran on 2/20/23.
+ -->
+
+<!-- SandboxList -->
+<template>
+    <lightning-spinner if:true={loadingData}></lightning-spinner>
+
+    <div class="slds-grid slds-gutters container">
+        <div class="slds-col slds-size_3-of-4">
+            <template lwc:if={sandboxes}>
+                <template for:each={sandboxes} for:item="sandbox">
+                    <div key={sandbox.id} class="slds-col slds-size_1-of-3">
+                        <article class="slds-card slds-m-top_x-small">
+                            <div class="slds-card__header slds-grid slds-gutters">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="Sandbox">
+                                    <lightning-icon icon-name="standard:account" size="small"></lightning-icon>
+                                </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h2 class="slds-card__header-title">
+                                            <lightning-button class="slds-card__header-link slds-truncate slds-m-left_x-small" variant="base" label={sandbox.SandboxName} title="Sandbox" onclick={handleClick}></lightning-button>
+                                        </h2>
+                                    </div>
+                                </header>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner">
+
+                            </div>
+                        </article>
+                    </div>
+
+                </template>
+            </template>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            <h1>Sandbox Details</h1>
+        </div>
+    </div>
+</template>
