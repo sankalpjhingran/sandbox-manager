@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Custom settings to store key and secret for the connected app. This app will be used to authenticate other production orgs.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Client_Id__c</fullName>
+        <description>Client Id of the connected app</description>
+        <externalId>false</externalId>
+        <label>Client Id</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Client_Secret__c</fullName>
+        <description>Client secret for the connected app</description>
+        <externalId>false</externalId>
+        <label>Client Secret</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Connected App Details</label>
+    <visibility>Protected</visibility>
+</CustomObject>

@@ -43,7 +43,7 @@ public with sharing class ToolingAPIClient {
     }*/
 
     public List<SandboxInfo> listSandboxes(String query) {
-        String endpoint = 'callout:This_Org_Named/services/data/v57.0/tooling/query?q=';
+        String endpoint = 'callout:This_Org/services/data/v57.0/tooling/query?q=';
         HttpResponse res = sfClient.doQuery(endpoint+query);
 
         if(res.getStatusCode() != 200) {
