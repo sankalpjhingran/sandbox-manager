@@ -10,8 +10,8 @@
         <name>ApexClass</name>
     </types>
     <types>
-        <members>Connected_App_Details__c.Client_Id__c</members>
-        <members>Connected_App_Details__c.Client_Secret__c</members>
+        <members>Connected_App_Secrets__c.Client_Id__c</members>
+        <members>Connected_App_Secrets__c.Client_Secret__c</members>
         <members>ProductionOrgs__c.Organization_Name__c</members>
         <members>ProductionOrgs__c.Password__c</members>
         <members>ProductionOrgs__c.Security_Token__c</members>
@@ -19,7 +19,11 @@
         <name>CustomField</name>
     </types>
     <types>
-        <members>Connected_App_Details__c</members>
+        <members>OAuth_Token</members>
+        <name>RemoteSiteSetting</name>
+    </types>
+    <types>
+        <members>Connected_App_Secrets__c</members>
         <members>ProductionOrgs__c</members>
         <name>CustomObject</name>
     </types>

@@ -17,8 +17,8 @@
     </fields>
     <fields>
         <fullName>Password__c</fullName>
-        <externalId>false</externalId>
         <description>Encrypted password for the service account user</description>
+        <externalId>false</externalId>
         <label>Password</label>
         <length>255</length>
         <required>true</required>
@@ -28,8 +28,8 @@
     </fields>
     <fields>
         <fullName>Security_Token__c</fullName>
-        <externalId>false</externalId>
         <description>Encrypted security token for the service account user</description>
+        <externalId>false</externalId>
         <label>Security Token</label>
         <length>255</length>
         <required>true</required>
@@ -39,8 +39,8 @@
     </fields>
     <fields>
         <fullName>Username__c</fullName>
-        <externalId>false</externalId>
         <description>Encrypted username for the service account user</description>
+        <externalId>false</externalId>
         <label>Username</label>
         <length>255</length>
         <required>true</required>
