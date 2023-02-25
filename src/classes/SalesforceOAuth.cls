@@ -30,9 +30,15 @@ public with sharing class SalesforceOAuth {
         ProductionOrgs__c prodOrgSetting = ProductionOrgs__c.getInstance(prodOrg);
         Connected_App_Secrets__c secrets = Connected_App_Secrets__c.getOrgDefaults();
 
+        String clientId = urlEncode(secrets.Client_Id__c);
+        String clientSecret = urlEncode(secrets.Client_Secret__c);
+        String username = urlEncode(prodOrgSetting.get('username__c').toString());
+        String password = urlEncode(prodOrgSetting.get('password__c').toString());
         String body = 'grant_type=password' +
-                '&client_id=' + EncodingUtil.urlEncode(secrets.Client_Id__c, 'UTF-8') + '&client_secret=' + EncodingUtil.urlEncode(secrets.Client_Secret__c, 'UTF-8') +
-                '&username=' + EncodingUtil.urlEncode(prodOrgSetting.get('username__c').toString(), 'UTF-8') + '&password=' + EncodingUtil.urlEncode(prodOrgSetting.get('password__c').toString(), 'UTF-8');
+                '&client_id=' + clientId +
+                '&client_secret=' + clientSecret +
+                '&username=' + username +
+                '&password=' + password;
 
         HttpResponse res = sfClient.login(envType, body);
         System.debug('Auth Response====> ' + res.getBody());
@@ -43,6 +49,10 @@ public with sharing class SalesforceOAuth {
             throw new SandboxClient.ToolingAPIException('Error authenticating ' + prodOrg + ' Org: ' + loginError.error);
         }
         return res;
+    }
+
+    private String urlEncode(String toEncode) {
+        return EncodingUtil.urlEncode(toEncode, 'UTF-8');
     }
 
     public class LoginError{
