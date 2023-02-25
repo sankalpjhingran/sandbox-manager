@@ -21,7 +21,7 @@ public with sharing class SandboxController {
         // prepare request
         String query = 'SELECT+' + String.join(SANDBOX_INFO_FIELD_LIST, ',') + '+FROM+SandboxInfo';
 
-        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         System.debug('authHelper====> ' + authHelper.getOrgId());
         SandboxClient sandboxClient = new SandboxClient(authHelper);
         return JSON.serialize(sandboxClient.listSandboxes(query));
@@ -29,7 +29,7 @@ public with sharing class SandboxController {
 
     @AuraEnabled
     public static String getProdOrgDetails(String prodOrg) {
-        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         String query = 'SELECT+Id,Name,OrganizationType,IsSandbox,InstanceName+FROM+Organization';
         SandboxClient sandboxClient = new SandboxClient(authHelper);
         return JSON.serialize(sandboxClient.getProdDetail(query));
@@ -37,7 +37,7 @@ public with sharing class SandboxController {
 
     @AuraEnabled
     public static String createSandbox(String prodOrg) {
-        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         SandboxClient toolingAPIClient = new SandboxClient(authHelper);
 
 
@@ -52,7 +52,7 @@ public with sharing class SandboxController {
 
     @AuraEnabled
     public static String scheduleSandboxCreation(String prodOrg, SandboxInfo sandboxInfo, String cronExpression) {
-        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         SandboxClient sandboxClient = new SandboxClient(authHelper);
         sandboxClient.scheduleSandboxCreate(sandboxInfo, cronExpression);
         return '';
@@ -60,7 +60,7 @@ public with sharing class SandboxController {
 
     @AuraEnabled
     public static String scheduleSandboxRefresh(String prodOrg, String sandboxId, String cronExpression) {
-        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         SandboxClient sandboxClient = new SandboxClient(authHelper);
         sandboxClient.scheduleSandboxRefresh(sandboxId, cronExpression);
         return '';

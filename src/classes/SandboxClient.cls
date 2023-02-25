@@ -5,10 +5,10 @@
 public with sharing class SandboxClient {
     private static final SalesforceClient sfClient = new SalesforceClient();
     private static final String BASE_URL = System.Url.getSalesforceBaseUrl().toExternalForm();
-    private final SFAuthHelper authHelper;
+    private final SalesforceOAuth authHelper;
     private SandboxClient() {}
 
-    public SandboxClient(SFAuthHelper authHelper) {
+    public SandboxClient(SalesforceOAuth authHelper) {
         this.authHelper = authHelper;
     }
 

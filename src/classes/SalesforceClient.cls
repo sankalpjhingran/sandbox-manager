@@ -12,39 +12,39 @@ public with sharing class SalesforceClient {
         return doCallWithBody('POST', endpoint, body, null);
     }
 
-    public HttpResponse doQuery(String endpoint, SFAuthHelper authHelper) {
+    public HttpResponse doQuery(String endpoint, SalesforceOAuth authHelper) {
         return doCallWithoutBody('GET', endpoint, authHelper);
     }
 
-    public HttpResponse doGet(String endpoint, SFAuthHelper authHelper) {
+    public HttpResponse doGet(String endpoint, SalesforceOAuth authHelper) {
         return doCallWithoutBody('GET', endpoint, authHelper);
     }
 
-    public HttpResponse doPost(String endpoint, String body, SFAuthHelper authHelper) {
+    public HttpResponse doPost(String endpoint, String body, SalesforceOAuth authHelper) {
         return doCallWithBody('POST', endpoint, body, authHelper);
     }
 
-    public HttpResponse doPatch(String endpoint, String body, SFAuthHelper authHelper) {
+    public HttpResponse doPatch(String endpoint, String body, SalesforceOAuth authHelper) {
         return doCallWithBody('PATCH', endpoint, body, authHelper);
     }
 
-    public HttpResponse doDelete(String endpoint, SFAuthHelper authHelper) {
+    public HttpResponse doDelete(String endpoint, SalesforceOAuth authHelper) {
         return doCallWithoutBody('DELETE', endpoint, authHelper);
     }
 
-    private HttpResponse doCallWithBodyAndHeaders(String method, String endpoint, String body, Map<String, String> headers, SFAuthHelper authHelper) {
+    private HttpResponse doCallWithBodyAndHeaders(String method, String endpoint, String body, Map<String, String> headers, SalesforceOAuth authHelper) {
         return doCall(method, endpoint, body, headers, authHelper);
     }
 
-    private HttpResponse doCallWithBody(String method, String endpoint, String body, SFAuthHelper authHelper) {
+    private HttpResponse doCallWithBody(String method, String endpoint, String body, SalesforceOAuth authHelper) {
         return doCall(method, endpoint, body, null, authHelper);
     }
 
-    private HttpResponse doCallWithoutBody(String method, String endpoint, SFAuthHelper authHelper) {
+    private HttpResponse doCallWithoutBody(String method, String endpoint, SalesforceOAuth authHelper) {
         return doCall(method, endpoint, null, null, authHelper);
     }
 
-    private HttpResponse doCall(String method, String endpoint, String body, Map<String, String> headers, SFAuthHelper authHelper) {
+    private HttpResponse doCall(String method, String endpoint, String body, Map<String, String> headers, SalesforceOAuth authHelper) {
         HttpRequest req = new HttpRequest();
         req.setMethod(method);
         req.setEndpoint(endpoint);

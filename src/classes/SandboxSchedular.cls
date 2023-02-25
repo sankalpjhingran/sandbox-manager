@@ -25,7 +25,7 @@ public with sharing class SandboxSchedular implements Schedulable {
     }
 
     public void execute(SchedulableContext param1) {
-        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         SandboxClient toolingAPIClient = new SandboxClient(authHelper);
         switch on action {
             when CREATE {

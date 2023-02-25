@@ -2,7 +2,7 @@
  * Created by sankalp.jhingran on 2/24/23.
  */
 
-public with sharing class SFAuthHelper {
+public with sharing class SalesforceOAuth {
     private static final SalesforceClient sfClient = new SalesforceClient();
     private static final String BASE_URL = System.Url.getSalesforceBaseUrl().toExternalForm();
 
@@ -12,9 +12,9 @@ public with sharing class SFAuthHelper {
     private final String instanceUrl;
     private final String orgId;
 
-    private SFAuthHelper(){} // no default construction
+    private SalesforceOAuth(){} // no default construction
 
-    public SFAuthHelper(String prodOrg, EnvType envType) {
+    public SalesforceOAuth(String prodOrg, EnvType envType) {
         this.prodOrg = prodOrg;
         this.envType = envType;
 
