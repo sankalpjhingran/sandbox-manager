@@ -1,0 +1,70 @@
+<!--
+ - Created by sankalp.jhingran on 2/24/23.
+ -->
+
+<!-- Productionorgheader -->
+<template>
+    <article class="slds-card">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name="standard:contact" size="medium" alternative-text="Contact"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body" style="line-height: 13px;">
+                            <span>{org}</span>
+                            <span class="slds-page-header__title slds-truncate" title={org}>{org}</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="slds-page-header__col-actions">
+                    <div class="slds-page-header__controls">
+                        <div class="slds-page-header__control">
+                            <lightning-button-group>
+                                <lightning-button label="New Sandbox" onclick={createSandbox}></lightning-button>
+                                <!--<lightning-button label="Save" icon-name="utility:save"></lightning-button>-->
+                                <!--<lightning-button-menu alternative-text="Show menu" variant="border-filled" menu-alignment="right">
+                                    <lightning-menu-item label="Menu Item One" value="item1"></lightning-menu-item>
+                                    <lightning-menu-item label="Menu Item Two" value="item2"></lightning-menu-item>
+                                    <lightning-menu-item label="Menu Item Three" value="item3"></lightning-menu-item>
+                                </lightning-button-menu>-->
+                            </lightning-button-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-page-header__row slds-page-header__row_gutters">
+                <div class="slds-page-header__col-details">
+                    <ul class="slds-page-header__detail-row" style="padding-left: 12px;" if:true={prodOrgInfo}>
+                        <li key={prodOrgInfo.Id} class="slds-page-header__detail-block">
+                            <div class="slds-item_label">
+                                OrgId
+                            </div>
+                            <div class="slds-item_detail">
+                                {prodOrgInfo.Id}
+                            </div>
+                        </li>
+                        <li key={prodOrgInfo.Id} class="slds-page-header__detail-block">
+                            <div class="slds-item_label">
+                                Instance
+                            </div>
+                            <div class="slds-item_detail">
+                                {prodOrgInfo.InstanceName}
+                            </div>
+                        </li>
+                        <li key={prodOrgInfo.Id} class="slds-page-header__detail-block">
+                            <div class="slds-item_label">
+                                Org Type
+                            </div>
+                            <div class="slds-item_detail">
+                                {prodOrgInfo.OrganizationType}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
+</template>

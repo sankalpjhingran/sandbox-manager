@@ -12,7 +12,7 @@
     <label>Sandbox Admin</label>
     <navType>Standard</navType>
     <setupExperience>all</setupExperience>
-    <tabs>Production_Orgs</tabs>
+    <tabs>HomeTab</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Sandbox_Manager_UtilityBar</utilityBar>
 </CustomApplication>

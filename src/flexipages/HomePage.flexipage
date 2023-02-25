@@ -3,14 +3,14 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>sandboxlist</componentName>
-                <identifier>sbmgr_sandboxlist</identifier>
+                <componentName>home</componentName>
+                <identifier>sbmgr_home</identifier>
             </componentInstance>
         </itemInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Production Orgs</masterLabel>
+    <masterLabel>Home</masterLabel>
     <template>
         <name>flexipage:defaultAppHomeTemplate</name>
     </template>

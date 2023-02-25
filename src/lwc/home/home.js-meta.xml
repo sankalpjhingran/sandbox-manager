@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
-    <description>SandboxList</description>
+    <description>Home</description>
     <isExposed>true</isExposed>
-    <masterLabel>SandboxList</masterLabel>
-
+    <masterLabel>Home</masterLabel>
     <targets>
-        <target>lightning__AppPage</target>
-        <target>lightning__RecordPage</target>
         <target>lightning__HomePage</target>
+        <target>lightning__AppPage</target>
     </targets>
 </LightningComponentBundle>

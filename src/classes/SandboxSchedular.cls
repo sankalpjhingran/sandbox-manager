@@ -6,6 +6,7 @@ public with sharing class SandboxSchedular implements Schedulable {
     private final String sandboxId;
     private final SandboxAction action;
     private final SandboxInfo sandboxInfo;
+    private final String prodOrg;
 
     private SandboxSchedular() {} // no empty construction
 
@@ -15,16 +16,17 @@ public with sharing class SandboxSchedular implements Schedulable {
         this.action = action;
 
         if(action.equals(SandboxAction.CREATE) && sandboxInfo == null) {
-            throw new ToolingAPIClient.ToolingAPIException('SandboxInfo cannot be null when CREATE action is used.');
+            throw new SandboxClient.ToolingAPIException('SandboxInfo cannot be null when CREATE action is used.');
         }
 
         if(action.equals(SandboxAction.REFRESH) || action.equals(SandboxAction.REMOVE)  && sandboxId == null) {
-            throw new ToolingAPIClient.ToolingAPIException('SandboxInfo cannot be null when CREATE action is used.');
+            throw new SandboxClient.ToolingAPIException('SandboxInfo cannot be null when CREATE action is used.');
         }
     }
 
     public void execute(SchedulableContext param1) {
-        ToolingAPIClient toolingAPIClient = new ToolingAPIClient();
+        SFAuthHelper authHelper = new SFAuthHelper(prodOrg, EnvType.PROD);
+        SandboxClient toolingAPIClient = new SandboxClient(authHelper);
         switch on action {
             when CREATE {
                 toolingAPIClient.createSandbox(sandboxInfo);

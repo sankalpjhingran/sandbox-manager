@@ -28,11 +28,11 @@
         <name>CustomObject</name>
     </types>
     <types>
-        <members>Production_Orgs</members>
+        <members>HomeTab</members>
         <name>CustomTab</name>
     </types>
     <types>
-        <members>Production_Orgs1</members>
+        <members>HomePage</members>
         <name>FlexiPage</name>
     </types>
     <types>
@@ -40,7 +40,10 @@
         <name>CustomApp</name>
     </types>
     <types>
-        <members>sandboxlist</members>
+        <members>productionorg</members>
+        <members>home</members>
+        <members>sandboxdetails</members>
+        <members>productionorgheader</members>
         <name>LightningComponentBundle</name>
     </types>
     <version>56.0</version>

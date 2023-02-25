@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsType>List</customSettingsType>
     <description>Protected custom setting to store details for production orgs</description>
     <enableFeeds>false</enableFeeds>
     <fields>
