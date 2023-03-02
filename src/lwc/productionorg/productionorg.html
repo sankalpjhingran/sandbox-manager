@@ -7,18 +7,18 @@
     <div if:true={loadingData}>
         <lightning-spinner></lightning-spinner>
     </div>
-    <div class="slds-grid slds-grid_vertical slds-gutters">
-        <div class="slds-col">
+    <div class="slds-grid margin-top-left-normal">
+        <div class="slds-col slds-gutters">
             <c-productionorgheader org={orgName} prod-org-info={prodOrgInfo}></c-productionorgheader>
         </div>
     </div>
-    <div class="slds-grid slds-gutters">
-        <div class="slds-col slds-size_3-of-4">
+    <div class="slds-grid container margin-top-left-normal border-radius-normal">
+        <div class="slds-col slds-size_3-of-4 slds-gutters">
             <template lwc:if={sandboxes}>
                 <template for:each={sandboxes} for:item="sandbox">
                     <div key={sandbox.id} class="slds-col slds-size_1-of-3">
                         <article class="slds-card slds-m-top_x-small">
-                            <div class="slds-card__header slds-grid slds-gutters">
+                            <div class="slds-card__header slds-grid">
                                 <header class="slds-media slds-media_center slds-has-flexi-truncate">
                                     <div class="slds-media__figure">
                                 <span class="slds-icon_container slds-icon-standard-account" title="Sandbox">

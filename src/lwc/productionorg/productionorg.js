@@ -67,6 +67,7 @@ export default class ProductionOrg extends LightningElement {
                         variant: 'error'
                     }),
                 );
+                this.loadingData = false;
             });
     }
 

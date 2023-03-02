@@ -5,11 +5,17 @@
 import {api, LightningElement, track, wire} from 'lwc';
 import getAllProductionOrgs from '@salesforce/apex/SandboxController.getAllProductionOrgs';
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
+/*import hideheader from '@salesforce/resourceUrl/hideheader';
+import { loadStyle } from 'lightning/platformResourceLoader';*/
 
 export default class Home extends LightningElement {
     @track prodOrgs;
     @track error;
     @api selectedProd;
+
+    /*renderedCallback() {
+        loadStyle(this, hideheader);
+    }*/
 
     @wire(getAllProductionOrgs)
     wiredAllProdOrgs({ error, data }) {

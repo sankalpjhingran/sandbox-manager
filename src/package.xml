@@ -16,7 +16,12 @@
         <members>ProductionOrgs__c.Password__c</members>
         <members>ProductionOrgs__c.Security_Token__c</members>
         <members>ProductionOrgs__c.Username__c</members>
+        <members>Crypto_Secret__c.Crypto_Key__c</members>
         <name>CustomField</name>
+    </types>
+    <types>
+        <members>hideheader</members>
+        <name>StaticResource</name>
     </types>
     <types>
         <members>OAuth_Token</members>
@@ -25,14 +30,15 @@
     <types>
         <members>Connected_App_Secrets__c</members>
         <members>ProductionOrgs__c</members>
+        <members>Crypto_Secret__c</members>
         <name>CustomObject</name>
     </types>
     <types>
-        <members>HomeTab</members>
+        <members>Admin</members>
         <name>CustomTab</name>
     </types>
     <types>
-        <members>HomePage</members>
+        <members>Admin</members>
         <name>FlexiPage</name>
     </types>
     <types>
@@ -44,6 +50,8 @@
         <members>home</members>
         <members>sandboxdetails</members>
         <members>productionorgheader</members>
+        <members>admin</members>
+        <members>addprodmodal</members>
         <name>LightningComponentBundle</name>
     </types>
     <version>56.0</version>

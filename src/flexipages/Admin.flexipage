@@ -4,15 +4,15 @@
         <itemInstances>
             <componentInstance>
                 <componentName>home</componentName>
-                <identifier>sbmgr_home</identifier>
+                <identifier>sbmgr_admin</identifier>
             </componentInstance>
         </itemInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Home</masterLabel>
+    <masterLabel>Admin</masterLabel>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>runtime_commerce_oci:homeTemplateOneRegion</name>
     </template>
-    <type>AppPage</type>
+    <type>HomePage</type>
 </FlexiPage>

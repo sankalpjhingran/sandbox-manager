@@ -1,9 +1,28 @@
 /* CSS */
 .container {
-    max-width: 1200rem;
-    margin: 0 auto;
-    padding: 2rem;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.border-radius-normal {
     border-radius: 0.25rem;
+}
+
+/*
+.no-left-padding {
+    padding-left: 0rem;
+}*/
+
+.margin-top-reduced {
+    margin-top: -12px;
+}
+
+.margin-top-normal {
+    margin-top: 12px;
+}
+
+div[role="list"][interop-verticalNavigationSection_verticalNavigationSection] {
+    list-style: none;
+    margin-left: -12px !important;
+    position: fixed;
 }

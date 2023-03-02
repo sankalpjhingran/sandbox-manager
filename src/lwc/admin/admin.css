@@ -1,0 +1,12 @@
+/**
+ * Created by sankalp.jhingran on 2/26/23.
+ */
+
+.container {
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.border-radius-normal {
+    border-radius: 0.25rem;
+}

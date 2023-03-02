@@ -1,0 +1,21 @@
+/**
+ * Created by sankalp.jhingran on 2/25/23.
+ */
+
+.container {
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.border-radius-normal {
+    border-radius: 0.25rem;
+}
+
+.margin-top-left-normal {
+    margin-left: 0px;
+    margin-top: 12px;
+}
+/*
+.no-left-padding {
+    padding-left: 0rem;
+}*/

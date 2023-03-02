@@ -1,14 +1,14 @@
 <!--
  - Created by sankalp.jhingran on 2/23/23.
  -->
-
 <!-- Home -->
 <template>
-    <div class="slds-grid slds-gutters container">
-        <div class="slds-col slds-size_1-of-6">
+    <div class="slds-grid slds-gutters margin-top-reduced">
+        <div class="slds-col slds-size_1-of-8 container">
             <div>
-                <lightning-vertical-navigation onselect={showProd} selected-item={selectedProd}>
-                    <lightning-vertical-navigation-section label="Production Orgs">
+                <lightning-vertical-navigation style="margin-left:-12px;" onselect={showProd} selected-item={selectedProd}>
+                    <lightning-vertical-navigation-section>
+                        <lightning-vertical-navigation-item label="Home"></lightning-vertical-navigation-item>
                         <template for:each={prodOrgs} for:item="prod">
                             <lightning-vertical-navigation-item key={prod} label={prod} name={prod}></lightning-vertical-navigation-item>
                         </template>
@@ -16,9 +16,14 @@
                 </lightning-vertical-navigation>
             </div>
         </div>
-        <div class="slds-col slds-size_5-of-6">
+        <div class="slds-col slds-size_7-of-8">
             <div if:true={selectedProd}>
                 <c-productionorg org-name={selectedProd}></c-productionorg>
+            </div>
+            <div if:false={selectedProd}>
+                <div class="container border-radius-normal margin-top-normal">
+                    <h1>Trust Status for production orgs</h1>
+                </div>
             </div>
         </div>
     </div>

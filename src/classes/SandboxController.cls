@@ -3,10 +3,31 @@
  */
 
 public with sharing class SandboxController {
+
     private static final List<String> SANDBOX_INFO_FIELD_LIST = new List<String> {
             'id', 'ApexClassId', 'AutoActivate', 'CopyChatter', 'Description', 'HistoryDays', 'IsNonPreview',
             'IsPreRelease', 'IsPreview', 'LicenseType', 'SandboxName', 'SourceId', 'TemplateId'
     };
+
+    // SandboxAdmin
+    public static void getConnectedAppDetails() {
+        MetadataService.MetadataPort service = createService();
+        List<MetadataService.ListMetadataQuery> queries = new List<MetadataService.ListMetadataQuery>();
+        MetadataService.ListMetadataQuery queryApp = new MetadataService.ListMetadataQuery();
+        queryApp.type_x = 'ConnectedApp';
+        queries.add(queryApp);
+        MetadataService.FileProperties[] fileProperties = service.listMetadata(queries, 25);
+        for(MetadataService.FileProperties fileProperty : fileProperties)
+            System.debug(fileProperty.fullName);
+    }
+
+    public static MetadataService.MetadataPort createService()
+    {
+        MetadataService.MetadataPort service = new MetadataService.MetadataPort();
+        service.SessionHeader = new MetadataService.SessionHeader_element();
+        service.SessionHeader.sessionId = UserInfo.getSessionId();
+        return service;
+    }
 
     @AuraEnabled(Cacheable=true)
     public static List<String> getAllProductionOrgs() {
