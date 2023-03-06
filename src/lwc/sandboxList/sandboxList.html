@@ -1,0 +1,12 @@
+<!--
+ - Created by sankalp.jhingran on 3/4/23.
+ -->
+
+<!-- Sandbox List -->
+<template>
+    <template for:each={sandboxes} for:item="sandbox">
+        <div key={sandbox.id} class="slds-col slds-size_1-of-3">
+            <c-sandbox-item sandbox-item={sandbox}></c-sandbox-item>
+        </div>
+    </template>
+</template>

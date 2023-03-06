@@ -5,24 +5,30 @@
 import {api, LightningElement, track, wire} from 'lwc';
 import getAllProductionOrgs from '@salesforce/apex/SandboxController.getAllProductionOrgs';
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
-/*import hideheader from '@salesforce/resourceUrl/hideheader';
-import { loadStyle } from 'lightning/platformResourceLoader';*/
 
 export default class Home extends LightningElement {
-    @track prodOrgs;
+    @api prodOrgs = [];
     @track error;
     @api selectedProd;
 
-    /*renderedCallback() {
-        loadStyle(this, hideheader);
-    }*/
+    @track initialRender = false;
+
+    renderedCallback() {
+        if(!this.initialRender) {
+            this.selectedProd = 'Home';
+        }
+        this.initialRender = true;
+    }
 
     @wire(getAllProductionOrgs)
     wiredAllProdOrgs({ error, data }) {
-        console.log('wiredAllProdOrgs====>');
         if (data) {
-            console.log('data====>', data);
-            this.prodOrgs = data;
+            let orgs = [];
+            orgs.push('Home');
+            for (let i in data) {
+                orgs.push(data[i]);
+            }
+            this.prodOrgs = orgs;
         } else if (error) {
             this.error = error;
             this.dispatchEvent(
@@ -35,9 +41,17 @@ export default class Home extends LightningElement {
         }
     }
 
+    @api
     showProd(event) {
-        console.log('showProd clicked====>');
-        console.log(event.detail.name);
-        this.selectedProd = event.detail.name;
+        console.log('showProd clicked====>', event.detail);
+        this.selectedProd = event.detail;
+
+        if(!this.isHome) {
+            this.template.querySelector('c-productionorg').getProdAndAllSandboxes();
+        }
+    }
+
+    get isHome() {
+        return (this.selectedProd === 'Home');
     }
 }

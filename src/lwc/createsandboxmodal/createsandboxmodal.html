@@ -1,0 +1,21 @@
+<!--
+ - Created by sankalp.jhingran on 3/5/23.
+ -->
+
+<!-- Createsandboxmodal -->
+<template>
+    <lightning-modal-header label="Create New Sandbox"></lightning-modal-header>
+    <lightning-modal-body>
+        <form>
+            <div class="slds-box slds-theme_default">
+                <lightning-input onchange={handleChange} name="apexClassId" label="Apex Class" type="text" value={sandboxInfo.apexClassId}></lightning-input>
+                <lightning-input onclick={handleChange} name="autoActivate" label="Auto Activate" type="checkbox" value={sandboxInfo.autoActivate}></lightning-input>
+            </div>
+        </form>
+        <!--{content}-->
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button class="slds-m-left_x-small" variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+        <lightning-button class="slds-m-left_x-small" variant="brand" label="Save" onclick={handleSave}></lightning-button>
+    </lightning-modal-footer>
+</template>

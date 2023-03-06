@@ -27,8 +27,10 @@ public with sharing class SalesforceOAuth {
     }
 
     public HttpResponse authorizeOrg() {
+        System.debug('prodOrg====> ' + prodOrg);
         ProductionOrgs__c prodOrgSetting = ProductionOrgs__c.getInstance(prodOrg);
         Connected_App_Secrets__c secrets = Connected_App_Secrets__c.getOrgDefaults();
+
 
         String clientId = urlEncode(secrets.Client_Id__c);
         String clientSecret = urlEncode(secrets.Client_Secret__c);

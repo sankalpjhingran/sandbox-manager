@@ -57,17 +57,12 @@ public with sharing class SandboxController {
     }
 
     @AuraEnabled
-    public static String createSandbox(String prodOrg) {
+    public static String createSandbox(String prodOrg, SandboxInfo sandboxInfo) {
         SalesforceOAuth authHelper = new SalesforceOAuth(prodOrg, EnvType.PROD);
         SandboxClient toolingAPIClient = new SandboxClient(authHelper);
 
-
-
         // call doGet and return
-        SandboxInfo si = new SandboxInfo.Builder()
-                .withActivationUserGroupId('test')
-                .build();
-        toolingAPIClient.createSandbox(si);
+        toolingAPIClient.createSandbox(sandboxInfo);
         return '';
     }
 

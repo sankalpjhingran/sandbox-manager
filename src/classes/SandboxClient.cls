@@ -38,10 +38,7 @@ public with sharing class SandboxClient {
 
     public void createSandbox(SandboxInfo sandboxInfo) {
         String endpoint = BASE_URL + '/services/data/v56.0/tooling/sobjects/SandboxInfo';
-        SandboxInfo si = new SandboxInfo.Builder()
-                                      .withActivationUserGroupId('test')
-                                      .build();
-        HttpResponse res = sfClient.doPost(endpoint, JSON.serialize(si, true), authHelper);
+        HttpResponse res = sfClient.doPost(endpoint, JSON.serialize(sandboxInfo, true), authHelper);
     }
 
     public void refreshSandbox(String sandboxId) {

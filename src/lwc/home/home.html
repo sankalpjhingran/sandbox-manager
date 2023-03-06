@@ -6,21 +6,21 @@
     <div class="slds-grid slds-gutters margin-top-reduced">
         <div class="slds-col slds-size_1-of-8 container">
             <div>
-                <lightning-vertical-navigation style="margin-left:-12px;" onselect={showProd} selected-item={selectedProd}>
-                    <lightning-vertical-navigation-section>
-                        <lightning-vertical-navigation-item label="Home"></lightning-vertical-navigation-item>
-                        <template for:each={prodOrgs} for:item="prod">
-                            <lightning-vertical-navigation-item key={prod} label={prod} name={prod}></lightning-vertical-navigation-item>
-                        </template>
-                    </lightning-vertical-navigation-section>
-                </lightning-vertical-navigation>
+                <c-verticalnavigation
+                        onitemselected={showProd}
+                        prod-orgs={prodOrgs}>
+                </c-verticalnavigation>
             </div>
         </div>
         <div class="slds-col slds-size_7-of-8">
-            <div if:true={selectedProd}>
-                <c-productionorg org-name={selectedProd}></c-productionorg>
+            <div if:false={isHome}>
+                <c-productionorg
+                        key={selectedProd}
+                        prod-org={selectedProd}>
+                </c-productionorg>
             </div>
-            <div if:false={selectedProd}>
+
+            <div if:true={isHome}>
                 <div class="container border-radius-normal margin-top-normal">
                     <h1>Trust Status for production orgs</h1>
                 </div>

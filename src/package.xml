@@ -52,6 +52,11 @@
         <members>productionorgheader</members>
         <members>admin</members>
         <members>addprodmodal</members>
+        <members>sandboxList</members>
+        <members>sandboxItem</members>
+        <members>verticalnavigation</members>
+        <members>verticalnavitem</members>
+        <members>createsandboxmodal</members>
         <name>LightningComponentBundle</name>
     </types>
     <version>56.0</version>

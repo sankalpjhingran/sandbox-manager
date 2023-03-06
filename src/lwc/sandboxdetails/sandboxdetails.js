@@ -6,4 +6,6 @@ import {api, LightningElement} from 'lwc';
 
 export default class Sandboxdetails extends LightningElement {
     @api sandbox;
+
+
 }
