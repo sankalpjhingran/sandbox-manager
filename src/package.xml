@@ -20,7 +20,7 @@
         <name>CustomField</name>
     </types>
     <types>
-        <members>hideheader</members>
+        <members>*</members>
         <name>StaticResource</name>
     </types>
     <types>
