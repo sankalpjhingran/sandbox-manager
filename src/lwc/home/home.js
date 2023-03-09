@@ -15,7 +15,7 @@ export default class Home extends LightningElement {
 
     renderedCallback() {
         if(!this.initialRender) {
-            this.selectedProd = 'Home';
+            this.selectedProd = { name: 'Home' };
         }
         this.initialRender = true;
     }
@@ -24,11 +24,15 @@ export default class Home extends LightningElement {
     wiredAllProdOrgs({ error, data }) {
         if (data) {
             let orgs = [];
-            orgs.push('Home');
-            for (let i in data) {
-                orgs.push(data[i]);
+
+            let existingOrgs = JSON.parse(data);
+            console.log('prod orgs====> ', existingOrgs);
+            orgs.push( { name: 'Home' } );
+            for (let org in existingOrgs) {
+                orgs.push(existingOrgs[org]);
             }
             this.prodOrgs = orgs;
+            console.log('this.prodOrgs====> ', JSON.stringify(this.prodOrgs));
         } else if (error) {
             this.error = error;
             this.dispatchEvent(

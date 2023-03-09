@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>home</componentName>
+                <componentName>admin</componentName>
                 <identifier>sbmgr_admin</identifier>
             </componentInstance>
         </itemInstances>
@@ -12,7 +12,7 @@
     </flexiPageRegions>
     <masterLabel>Admin</masterLabel>
     <template>
-        <name>runtime_commerce_oci:homeTemplateOneRegion</name>
+        <name>flexipage:defaultAppHomeTemplate</name>
     </template>
-    <type>HomePage</type>
+    <type>AppPage</type>
 </FlexiPage>

@@ -5,12 +5,10 @@
 <template>
     <div class="slds-grid slds-gutters margin-top-reduced">
         <div class="slds-col slds-size_1-of-8 container">
-            <div>
-                <c-verticalnavigation
-                        onitemselected={showProd}
-                        prod-orgs={prodOrgs}>
-                </c-verticalnavigation>
-            </div>
+            <c-verticalnavigation
+                    onitemselected={showProd}
+                    prod-orgs={prodOrgs}>
+            </c-verticalnavigation>
         </div>
         <div class="slds-col slds-size_7-of-8">
             <div if:false={isHome}>

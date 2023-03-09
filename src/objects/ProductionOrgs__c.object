@@ -4,18 +4,6 @@
     <description>Protected custom setting to store details for production orgs</description>
     <enableFeeds>false</enableFeeds>
     <fields>
-        <fullName>Organization_Name__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>Name of the production org. It&apos;s unique and case insensitive</description>
-        <externalId>false</externalId>
-        <label>Organization Name</label>
-        <length>255</length>
-        <required>true</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
         <fullName>Password__c</fullName>
         <description>Encrypted password for the service account user</description>
         <externalId>false</externalId>
@@ -32,7 +20,7 @@
         <externalId>false</externalId>
         <label>Security Token</label>
         <length>255</length>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>

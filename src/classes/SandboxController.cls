@@ -29,12 +29,35 @@ public with sharing class SandboxController {
         return service;
     }
 
+    @AuraEnabled
+    public static Boolean validateProdOrg(String username, String password, String securityToken) {
+        ProductionOrg prodOrg = new ProductionOrg.Builder()
+                                            .withUsername(username)
+                                            .withPassword(password)
+                                            .withSecurityToken(securityToken)
+                                            .build();
+        try {
+            SalesforceOAuth oAuth = new SalesforceOAuth(prodOrg);
+            if(oAuth.getSessionId() != null) {
+                return true;
+            }
+        }catch(Exception ex) {
+            throw ex;
+        }
+        return false;
+    }
+
     @AuraEnabled(Cacheable=true)
-    public static List<String> getAllProductionOrgs() {
-        Map<String, ProductionOrgs__c> prodOrgs = ProductionOrgs__c.getAll();
-        List<String> orgNames = new List<String>();
-        orgNames.addAll(prodOrgs.keySet());
-        return orgNames;
+    public static String getAllProductionOrgs() {
+        List<ProductionOrg> prodOrgs = new List<ProductionOrg>();
+        for(ProductionOrgs__c org : ProductionOrgs__c.getAll().values()) {
+            prodOrgs.add( new ProductionOrg.Builder()
+                                    .withName(org.Name)
+                                    .withUsername(org.Username__c)
+                                    .build()
+            );
+        }
+        return JSON.serialize(prodOrgs);
     }
 
     @AuraEnabled(Cacheable=true)

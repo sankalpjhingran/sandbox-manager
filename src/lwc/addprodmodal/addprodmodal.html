@@ -4,9 +4,26 @@
 
 <!-- Addprodmodal -->
 <template>
-    <lightning-modal-header label="My Modal Heading"></lightning-modal-header>
-    <lightning-modal-body> Content: {content} </lightning-modal-body>
+    <lightning-modal-header label="New Production Org"></lightning-modal-header>
+    <lightning-modal-body>
+        <form>
+            <div class="slds-box slds-theme_default">
+                <lightning-input onchange={handleChange} name="name" label="Name" type="text" value={productionOrg.name}></lightning-input>
+                <lightning-input onchange={handleChange} name="username" label="Username" type="text" value={productionOrg.username}></lightning-input>
+                <lightning-input onchange={handleChange} name="password" label="Password" type="text" value={productionOrg.password}></lightning-input>
+                <lightning-input onchange={handleChange} name="securityToken" label="Security Token" type="text" value={productionOrg.securityToken}></lightning-input>
+            </div>
+        </form>
+    </lightning-modal-body>
     <lightning-modal-footer>
-        <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col" style="text-align: left;">
+                <lightning-button class="slds-m-left_x-small" variant="brand" label="Validate" onclick={handleValidate}></lightning-button>
+            </div>
+            <div class="slds-col" style="text-align: right;">
+                <lightning-button class="slds-m-left_x-small" variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                <lightning-button class="slds-m-left_x-small" variant="brand" label="Save" onclick={handleSave}></lightning-button>
+            </div>
+        </div>
     </lightning-modal-footer>
 </template>

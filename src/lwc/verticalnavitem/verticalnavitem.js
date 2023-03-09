@@ -15,7 +15,7 @@ export default class Verticalnavitem extends LightningElement {
 
     selectItem() {
         console.log('Item selected====> ', this.item);
-        let itemSelectEvent = new CustomEvent("itemselected", { bubbles: true, composed: true, detail: this.item });
+        let itemSelectEvent = new CustomEvent("itemselected", { bubbles: true, composed: true, detail: this.item.name });
         this.dispatchEvent(itemSelectEvent);
         this.active = true;
     }

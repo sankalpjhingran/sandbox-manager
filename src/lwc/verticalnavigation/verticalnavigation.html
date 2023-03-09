@@ -10,7 +10,7 @@
                 <ul aria-describedby="entity-header">
                     <template for:each={prodOrgs} for:item="prod">
                         <c-verticalnavitem
-                                key={prod}
+                                key={prod.name}
                                 item={prod}>
                         </c-verticalnavitem>
                     </template>

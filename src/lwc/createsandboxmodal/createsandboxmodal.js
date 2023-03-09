@@ -8,7 +8,6 @@ import createSandbox from '@salesforce/apex/SandboxController.createSandbox';
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
 
 export default class Createsandboxmodal extends LightningModal {
-    @api content;
 
     @track sandboxInfo = {
         ApexClassId: 'John',
