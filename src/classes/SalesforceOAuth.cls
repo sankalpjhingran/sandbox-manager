@@ -36,7 +36,8 @@ public with sharing class SalesforceOAuth {
 
     public SalesforceOAuth(ProductionOrg prodOrg) {
         System.debug('prodOrg====> ' + prodOrg);
-        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(authorizeOrg(prodOrg).getBody());
+        HttpResponse authResponse = authorizeOrg(prodOrg);
+        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(authResponse.getBody());
         this.sessionId = (String) responseMap.get('access_token');
         this.instanceUrl = (String) responseMap.get('instance_url');
     }
@@ -48,11 +49,16 @@ public with sharing class SalesforceOAuth {
         String clientSecret = urlEncode(secrets.Client_Secret__c);
         String username = urlEncode(prodOrg.getUsername());
         String password = urlEncode(prodOrg.getPassword());
+
+        String securityToken = urlEncode(prodOrg.getSecurityToken());
+
         String body = 'grant_type=password' +
                 '&client_id=' + clientId +
                 '&client_secret=' + clientSecret +
                 '&username=' + username +
-                '&password=' + password + urlEncode(prodOrg.getSecurityToken());
+                '&password=' + password + securityToken;
+
+        System.debug(body);
 
         HttpResponse res = sfClient.login(envType, body);
         System.debug('Auth Response====> ' + res.getBody());
@@ -66,7 +72,11 @@ public with sharing class SalesforceOAuth {
     }
 
     private String urlEncode(String toEncode) {
-        return EncodingUtil.urlEncode(toEncode, 'UTF-8');
+        String encodedStr = '';
+        if(toEncode != null) {
+            encodedStr = EncodingUtil.urlEncode(toEncode, 'UTF-8');
+        }
+        return encodedStr;
     }
 
     public class LoginError{

@@ -60,6 +60,58 @@ public with sharing class SandboxController {
         return JSON.serialize(prodOrgs);
     }
 
+    @AuraEnabled
+    public static Boolean deleteProdOrg(String prodOrgName) {
+        return Database.delete(ProductionOrgs__c.getInstance(prodOrgName)).success;
+    }
+
+    @AuraEnabled
+    public static Boolean addProductionOrg(String name, String username, String password, String securityToken) {
+        if(validateProdOrg(username, password, securityToken)) {
+            ProductionOrgs__c org = new ProductionOrgs__c();
+            org.Name = name;
+            org.Username__c = username;
+            org.Password__c = password;
+            org.Security_Token__c = securityToken;
+
+            Database.SaveResult saveResult = Database.insert(org);
+
+            if(saveResult.success) {
+                return true;
+            } else {
+                String error;
+                for(Database.Error err : saveResult.getErrors()) {
+                    error =+ err.message;
+                }
+                throw new SandboxClient.ToolingAPIException(error);
+            }
+        }
+        return false;
+    }
+
+    @AuraEnabled
+    public static Boolean updateProductionOrg(String name, String username, String password, String securityToken) {
+        if(validateProdOrg(username, password, securityToken)) {
+            ProductionOrgs__c org = new ProductionOrgs__c();
+            org.Name = name;
+            org.Username__c = username;
+            org.Password__c = password;
+            org.Security_Token__c = securityToken;
+            Database.SaveResult updateResult = Database.update(org);
+
+            if(updateResult.success) {
+                return true;
+            } else {
+                String error;
+                for(Database.Error err : updateResult.getErrors()) {
+                    error =+ err.message;
+                }
+                throw new SandboxClient.ToolingAPIException(error);
+            }
+        }
+        return false;
+    }
+
     @AuraEnabled(Cacheable=true)
     public static String getAllSandboxes(String prodOrg) {
         // prepare request

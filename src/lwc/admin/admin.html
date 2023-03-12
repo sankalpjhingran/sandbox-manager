@@ -7,19 +7,30 @@
     <div class="container border-radius-normal">
         <lightning-tabset variant="vertical">
             <lightning-tab label="Production Orgs">
-                <lightning-button label="Add Production Org" name="add" onclick={handleClick}></lightning-button>
-                <div class="slds-grid slds-gutters">
-                    <template for:each={prodOrgs} for:item="prod">
-                        <lightning-card key={prod.name} title={prod.name}>
-                            <p class="slds-p-horizontal_small">
-                                Username: {prod.username}
-                            </p>
-                            <p slot="footer">
-                                <lightning-button label="Edit" slot="actions"></lightning-button>
-                                <lightning-button label="Del" slot="actions"></lightning-button>
-                            </p>
-                        </lightning-card>
-                    </template>
+                <div class="slds-grid slds-wrap slds-m-bottom_medium">
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-button class="slds-m-bottom_medium" label="Add Production Org" name="add" onclick={handleNew}></lightning-button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <div class="slds-grid slds-gutters">
+                            <template for:each={prodOrgs} for:item="prod">
+                                <div class="slds-size_1-of-5 slds-m-left_medium" key={prod.name}>
+                                    <lightning-card key={prod.name} title={prod.name}>
+                                        <p class="slds-p-horizontal_small">
+                                            Username:
+                                        </p>
+                                        <p class="slds-p-horizontal_small">
+                                            {prod.username}
+                                        </p>
+                                        <p slot="footer">
+                                            <lightning-button label="Edit" value={prod} data-id={prod.name} key={prod.name} onclick={handleEdit} slot="actions"></lightning-button>
+                                            <lightning-button label="Del" slot="actions" value={prod} data-id={prod.name} onclick={handleDel}></lightning-button>
+                                        </p>
+                                    </lightning-card>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
                 </div>
             </lightning-tab>
             <lightning-tab label="Tab#2">

@@ -2,12 +2,15 @@
  * Created by sankalp.jhingran on 2/26/23.
  */
 
-import {api, LightningElement, wire} from 'lwc';
+import {api, LightningElement, track, wire} from 'lwc';
 import getAllProductionOrgs from '@salesforce/apex/SandboxController.getAllProductionOrgs';
+import deleteProdOrg from '@salesforce/apex/SandboxController.deleteProdOrg';
 import MyModal from 'c/addprodmodal';
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
 export default class Admin extends LightningElement {
     @api prodOrgs;
+
+    @track selectProdOrg;
 
     @wire(getAllProductionOrgs)
     wiredAllProdOrgs({ error, data }) {
@@ -26,16 +29,47 @@ export default class Admin extends LightningElement {
         }
     }
 
-    async handleClick() {
+    async handleNew() {
         const result = await MyModal.open({
-            // `label` is not included here in this example.
-            // it is set on lightning-modal-header instead
+            label: 'New Production Org',
             size: 'small',
             description: 'Accessible description of modal\'s purpose',
-            content: 'Passed into content api',
+            purpose: 'new'
         });
-        // if modal closed with X button, promise returns result = 'undefined'
-        // if modal closed with OK button, promise returns result = 'okay'
-        console.log(result);
+    }
+
+    async handleEdit(event) {
+        console.log('handle click modal====>', JSON.stringify(event.target.value));
+        const result = await MyModal.open({
+            label: 'Edit Production Org',
+            size: 'small',
+            description: 'Accessible description of modal\'s purpose',
+            productionOrg: event.target.value,
+            purpose: 'edit'
+        });
+    }
+
+    handleDel(event) {
+        console.log('value to delete===>', JSON.stringify(event.target.value));
+        deleteProdOrg({ prodOrgName: event.target.value.name })
+            .then(data => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success',
+                        message: 'Successfully deleted Production Org!',
+                        variant: 'success'
+                    }),
+                );
+            })
+            .catch(error => {
+                this.error = error;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error',
+                        message: 'Error deleting Production Org: ' + this.error.body.message,
+                        variant: 'error'
+                    }),
+                );
+            })
     }
 }
