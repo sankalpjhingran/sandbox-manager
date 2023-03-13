@@ -52,8 +52,11 @@ public with sharing class SandboxController {
         List<ProductionOrg> prodOrgs = new List<ProductionOrg>();
         for(ProductionOrgs__c org : ProductionOrgs__c.getAll().values()) {
             prodOrgs.add( new ProductionOrg.Builder()
+                                    .withId(org.Id)
                                     .withName(org.Name)
                                     .withUsername(org.Username__c)
+                                    .withPassword(org.Password__c)
+                                    .withSecurityToken(org.Security_Token__c)
                                     .build()
             );
         }
@@ -71,9 +74,10 @@ public with sharing class SandboxController {
             ProductionOrgs__c org = new ProductionOrgs__c();
             org.Name = name;
             org.Username__c = username;
-            org.Password__c = password;
-            org.Security_Token__c = securityToken;
-
+            org.Password__c = CryptoHelper.encrypt(password);
+            if(String.isNotBlank(securityToken)) {
+                org.Security_Token__c = CryptoHelper.encrypt(securityToken);
+            }
             Database.SaveResult saveResult = Database.insert(org);
 
             if(saveResult.success) {
@@ -90,13 +94,20 @@ public with sharing class SandboxController {
     }
 
     @AuraEnabled
-    public static Boolean updateProductionOrg(String name, String username, String password, String securityToken) {
+    public static Boolean updateProductionOrg(String id, String name, String username, String password, String securityToken) {
         if(validateProdOrg(username, password, securityToken)) {
-            ProductionOrgs__c org = new ProductionOrgs__c();
+            Map<Id, ProductionOrgs__c> allOrgsMapById = new Map<Id, ProductionOrgs__c>();
+            for(ProductionOrgs__c org : ProductionOrgs__c.getAll().values()) {
+                allOrgsMapById.put(org.Id, org);
+            }
+
+            ProductionOrgs__c org = allOrgsMapById.get(id);
             org.Name = name;
             org.Username__c = username;
-            org.Password__c = password;
-            org.Security_Token__c = securityToken;
+            org.Password__c = CryptoHelper.encrypt(password);
+            if(String.isNotBlank(securityToken)) {
+                org.Security_Token__c = CryptoHelper.encrypt(securityToken);
+            }
             Database.SaveResult updateResult = Database.update(org);
 
             if(updateResult.success) {

@@ -3,6 +3,7 @@
  */
 
 public with sharing class ProductionOrg {
+    private final String id;
     private final String name;
     private final String username;
     private final String securityToken;
@@ -11,6 +12,7 @@ public with sharing class ProductionOrg {
     private ProductionOrg(){} // no public construction
 
     private ProductionOrg(ProductionOrg.Builder b) {
+        this.id = b.id;
         this.name = b.name;
         this.username = b.username;
         this.securityToken = b.securityToken;
@@ -34,10 +36,16 @@ public with sharing class ProductionOrg {
     }
 
     public class Builder {
+        private String id;
         private String name;
         private String username;
         private String securityToken;
         private String password;
+
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder withName(String name) {
             this.name = name;

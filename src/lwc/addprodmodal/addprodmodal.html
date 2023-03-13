@@ -4,14 +4,14 @@
 
 <!-- Addprodmodal -->
 <template>
-    <lightning-modal-header label="New Production Org"></lightning-modal-header>
+    <lightning-modal-header label={label}></lightning-modal-header>
     <lightning-modal-body>
         <form>
             <div class="slds-box slds-theme_default">
                 <lightning-input required="true" onchange={handleChange} name="name" label="Name" type="text" value={productionOrg.name}></lightning-input>
                 <lightning-input required="true" onchange={handleChange} name="username" label="Username" type="text" value={productionOrg.username}></lightning-input>
-                <lightning-input required="true" onchange={handleChange} name="password" label="Password" type="text" value={productionOrg.password}></lightning-input>
-                <lightning-input onchange={handleChange} name="securityToken" label="Security Token" type="text" value={productionOrg.securityToken}></lightning-input>
+                <lightning-input required="true" onchange={handleChange} name="password" label="Password" type="password" value={productionOrg.password}></lightning-input>
+                <lightning-input onchange={handleChange} name="securityToken" label="Security Token" type="password" value={productionOrg.securityToken}></lightning-input>
             </div>
         </form>
     </lightning-modal-body>

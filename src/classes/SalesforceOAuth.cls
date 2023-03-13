@@ -66,7 +66,7 @@ public with sharing class SalesforceOAuth {
         LoginError loginError = (LoginError)JSON.deserialize(res.getBody(), LoginError.class);
 
         if(res.getStatusCode() != 200) {
-            throw new SandboxClient.ToolingAPIException('Error authenticating org. Please check your credentials and the security token. If you have recently updated your security token, then update the token and try again: ' + loginError.error);
+            throw new SandboxClient.ToolingAPIException('Please check your credentials and the security token. If you have recently updated your security token, then update the token and try again: ' + loginError.error);
         }
         return res;
     }

@@ -10,6 +10,7 @@ import updateProductionOrg from '@salesforce/apex/SandboxController.updateProduc
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
 
 export default class Addprodmodal extends LightningModal {
+    @api label;
     @api productionOrg = {
         name: '',
         username: '',
@@ -84,6 +85,9 @@ export default class Addprodmodal extends LightningModal {
         } else if(this.purpose === 'edit') {
             this.handleSaveEdit();
         }
+
+        let event = new CustomEvent('modalclose', {});
+        this.dispatchEvent(event);
     }
 
     handleSaveNew() {
@@ -110,6 +114,9 @@ export default class Addprodmodal extends LightningModal {
                         variant: 'success'
                     }),
                 );
+                let createEvent = new CustomEvent('createsuccess', {});
+                this.dispatchEvent(createEvent);
+                this.disableClose = false;
                 this.close();
             })
             .catch(error => {
@@ -137,9 +144,9 @@ export default class Addprodmodal extends LightningModal {
             return;
         }
 
-        let { name, username, password, securityToken } = this.productionOrg;
+        let { id, name, username, password, securityToken } = this.productionOrg;
 
-        updateProductionOrg( { name: name, username: username, password: password, securityToken: securityToken })
+        updateProductionOrg( { id: id, name: name, username: username, password: password, securityToken: securityToken })
             .then(data => {
                 console.log(data);
                 this.dispatchEvent(
@@ -149,6 +156,9 @@ export default class Addprodmodal extends LightningModal {
                         variant: 'success'
                     }),
                 );
+                let updateEvent = new CustomEvent('updatesuccess', {});
+                this.dispatchEvent(updateEvent);
+                this.disableClose = false;
                 this.close();
             })
             .catch(error => {
@@ -165,6 +175,7 @@ export default class Addprodmodal extends LightningModal {
     }
 
     handleCancel() {
-        this.close('okay');
+        this.disableClose = false;
+        this.close();
     }
 }
