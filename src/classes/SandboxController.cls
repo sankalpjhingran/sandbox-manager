@@ -49,15 +49,24 @@ public with sharing class SandboxController {
 
     @AuraEnabled(Cacheable=true)
     public static String getAllProductionOrgs() {
+        return getProductionOrgs();
+    }
+
+    @AuraEnabled(Cacheable=false)
+    public static String getRefreshedProductionOrgs() {
+        return getProductionOrgs();
+    }
+
+    private static String getProductionOrgs() {
         List<ProductionOrg> prodOrgs = new List<ProductionOrg>();
         for(ProductionOrgs__c org : ProductionOrgs__c.getAll().values()) {
             prodOrgs.add( new ProductionOrg.Builder()
-                                    .withId(org.Id)
-                                    .withName(org.Name)
-                                    .withUsername(org.Username__c)
-                                    .withPassword(org.Password__c)
-                                    .withSecurityToken(org.Security_Token__c)
-                                    .build()
+                    .withId(org.Id)
+                    .withName(org.Name)
+                    .withUsername(org.Username__c)
+                    .withPassword(org.Password__c)
+                    .withSecurityToken(org.Security_Token__c)
+                    .build()
             );
         }
         return JSON.serialize(prodOrgs);

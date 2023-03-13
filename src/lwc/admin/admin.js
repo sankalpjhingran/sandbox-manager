@@ -4,6 +4,7 @@
 
 import {api, LightningElement, track, wire} from 'lwc';
 import getAllProductionOrgs from '@salesforce/apex/SandboxController.getAllProductionOrgs';
+import getRefreshedProductionOrgs from '@salesforce/apex/SandboxController.getRefreshedProductionOrgs';
 import deleteProdOrg from '@salesforce/apex/SandboxController.deleteProdOrg';
 import MyModal from 'c/addprodmodal';
 import {ShowToastEvent} from "lightning/platformShowToastEvent";
@@ -37,7 +38,7 @@ export default class Admin extends LightningElement {
     refreshProdOrgs() {
         console.log('Refreshing prod orgs====>');
         this.loading = true;
-        getAllProductionOrgs()
+        getRefreshedProductionOrgs()
             .then(data => {
                 console.log('New prod orgs1====> ', data);
                 this.prodOrgs = JSON.parse(data);
@@ -53,7 +54,19 @@ export default class Admin extends LightningElement {
             disableClose: true,
             size: 'small',
             description: 'Accessible description of modal\'s purpose',
-            purpose: 'new'
+            purpose: 'new',
+            oncreatesuccess: (e) => {
+                // stop further propagation of the event
+                e.stopPropagation();
+                // hand off to separate function to process
+                // result of the event (see above in this example)
+                // this.handleSelectEvent(e.detail);
+                // or proxy to be handled above by dispatching
+                // another custom event to pass on the event
+                // this.dispatchEvent(e);
+                console.log('Create successful====>');
+                this.refreshProdOrgs();
+            }
         });
     }
 
@@ -76,18 +89,6 @@ export default class Admin extends LightningElement {
                 // another custom event to pass on the event
                 // this.dispatchEvent(e);
                 console.log('Update successful====>');
-                this.refreshProdOrgs();
-            },
-            oncreatesuccess: (e) => {
-                // stop further propagation of the event
-                e.stopPropagation();
-                // hand off to separate function to process
-                // result of the event (see above in this example)
-                // this.handleSelectEvent(e.detail);
-                // or proxy to be handled above by dispatching
-                // another custom event to pass on the event
-                // this.dispatchEvent(e);
-                console.log('Create successful====>');
                 this.refreshProdOrgs();
             }
         });
@@ -119,6 +120,7 @@ export default class Admin extends LightningElement {
                         variant: 'success'
                     }),
                 );
+                this.refreshProdOrgs();
             })
             .catch(error => {
                 this.error = error;

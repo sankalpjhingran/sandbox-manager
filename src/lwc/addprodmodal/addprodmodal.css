@@ -1,0 +1,15 @@
+/**
+ * Created by sankalp.jhingran on 3/12/23.
+ */
+
+.my-css {
+    --slds-modal__close: var(display,  none);
+}
+
+
+
+:host {
+    /* Your CSS goes here */
+}
+
+
