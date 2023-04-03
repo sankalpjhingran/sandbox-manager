@@ -7,7 +7,8 @@ import getAllProductionOrgs from '@salesforce/apex/SandboxController.getAllProdu
 import getRefreshedProductionOrgs from '@salesforce/apex/SandboxController.getRefreshedProductionOrgs';
 import deleteProdOrg from '@salesforce/apex/SandboxController.deleteProdOrg';
 import MyModal from 'c/addprodmodal';
-import {ShowToastEvent} from "lightning/platformShowToastEvent";
+import connectedAppModal from 'c/connectedappmodal';
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 import LightningConfirm from 'lightning/confirm';
 
 export default class Admin extends LightningElement {
@@ -132,5 +133,16 @@ export default class Admin extends LightningElement {
                     }),
                 );
             })
+    }
+
+    async handleAddConnectedAppDetails() {
+        console.log('Calling handleAddConnectedAppDetails...');
+        const result = await connectedAppModal.open({
+            label: 'Add Connected App Details',
+            disableClose: true,
+            size: 'small',
+            description: 'Accessible description of modal\'s purpose',
+            purpose: 'new'
+        });
     }
 }

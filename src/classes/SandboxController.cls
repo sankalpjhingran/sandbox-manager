@@ -9,24 +9,11 @@ public with sharing class SandboxController {
             'IsPreRelease', 'IsPreview', 'LicenseType', 'SandboxName', 'SourceId', 'TemplateId'
     };
 
-    // SandboxAdmin
-    public static void getConnectedAppDetails() {
-        MetadataService.MetadataPort service = createService();
-        List<MetadataService.ListMetadataQuery> queries = new List<MetadataService.ListMetadataQuery>();
-        MetadataService.ListMetadataQuery queryApp = new MetadataService.ListMetadataQuery();
-        queryApp.type_x = 'ConnectedApp';
-        queries.add(queryApp);
-        MetadataService.FileProperties[] fileProperties = service.listMetadata(queries, 25);
-        for(MetadataService.FileProperties fileProperty : fileProperties)
-            System.debug(fileProperty.fullName);
-    }
-
-    public static MetadataService.MetadataPort createService()
-    {
-        MetadataService.MetadataPort service = new MetadataService.MetadataPort();
-        service.SessionHeader = new MetadataService.SessionHeader_element();
-        service.SessionHeader.sessionId = UserInfo.getSessionId();
-        return service;
+    @AuraEnabled
+    public static Boolean addConnectedAppDetails(String clientId, String clientSecret) {
+        System.debug(clientId);
+        System.debug(clientSecret);
+        return true;
     }
 
     @AuraEnabled
@@ -79,57 +66,63 @@ public with sharing class SandboxController {
 
     @AuraEnabled
     public static Boolean addProductionOrg(String name, String username, String password, String securityToken) {
-        if(validateProdOrg(username, password, securityToken)) {
-            ProductionOrgs__c org = new ProductionOrgs__c();
-            org.Name = name;
-            org.Username__c = username;
-            org.Password__c = CryptoHelper.encrypt(password);
-            if(String.isNotBlank(securityToken)) {
-                org.Security_Token__c = CryptoHelper.encrypt(securityToken);
-            }
-            Database.SaveResult saveResult = Database.insert(org);
-
-            if(saveResult.success) {
-                return true;
-            } else {
-                String error;
-                for(Database.Error err : saveResult.getErrors()) {
-                    error =+ err.message;
-                }
-                throw new SandboxClient.ToolingAPIException(error);
-            }
+        Boolean isUpdateSuccess = false;
+        if(!validateProdOrg(username, password, securityToken)) {
+            return isUpdateSuccess;
         }
-        return false;
+
+        ProductionOrgs__c org = new ProductionOrgs__c();
+        org.Name = name;
+        org.Username__c = username;
+        org.Password__c = CryptoHelper.encrypt(password);
+        if(String.isNotBlank(securityToken)) {
+            org.Security_Token__c = CryptoHelper.encrypt(securityToken);
+        }
+        Database.SaveResult saveResult = Database.insert(org);
+
+        if(saveResult.success) {
+            isUpdateSuccess = true;
+        } else {
+            String error;
+            for(Database.Error err : saveResult.getErrors()) {
+                error =+ err.message;
+            }
+            throw new SandboxClient.ToolingAPIException(error);
+        }
+        return isUpdateSuccess;
     }
 
     @AuraEnabled
     public static Boolean updateProductionOrg(String id, String name, String username, String password, String securityToken) {
-        if(validateProdOrg(username, password, securityToken)) {
-            Map<Id, ProductionOrgs__c> allOrgsMapById = new Map<Id, ProductionOrgs__c>();
-            for(ProductionOrgs__c org : ProductionOrgs__c.getAll().values()) {
-                allOrgsMapById.put(org.Id, org);
-            }
-
-            ProductionOrgs__c org = allOrgsMapById.get(id);
-            org.Name = name;
-            org.Username__c = username;
-            org.Password__c = CryptoHelper.encrypt(password);
-            if(String.isNotBlank(securityToken)) {
-                org.Security_Token__c = CryptoHelper.encrypt(securityToken);
-            }
-            Database.SaveResult updateResult = Database.update(org);
-
-            if(updateResult.success) {
-                return true;
-            } else {
-                String error;
-                for(Database.Error err : updateResult.getErrors()) {
-                    error =+ err.message;
-                }
-                throw new SandboxClient.ToolingAPIException(error);
-            }
+        Boolean isUpdateSuccess = false;
+        if(!validateProdOrg(username, password, securityToken)) {
+            return isUpdateSuccess;
         }
-        return false;
+
+        Map<Id, ProductionOrgs__c> allOrgsMapById = new Map<Id, ProductionOrgs__c>();
+        for(ProductionOrgs__c org : ProductionOrgs__c.getAll().values()) {
+            allOrgsMapById.put(org.Id, org);
+        }
+
+        ProductionOrgs__c org = allOrgsMapById.get(id);
+        org.Name = name;
+        org.Username__c = username;
+        org.Password__c = CryptoHelper.encrypt(password);
+        if(String.isNotBlank(securityToken)) {
+            org.Security_Token__c = CryptoHelper.encrypt(securityToken);
+        }
+        Database.SaveResult updateResult = Database.update(org);
+
+        if(updateResult.success) {
+            isUpdateSuccess = true;
+        } else {
+            String error;
+            for(Database.Error err : updateResult.getErrors()) {
+                error =+ err.message;
+            }
+            throw new SandboxClient.ToolingAPIException(error);
+        }
+        return isUpdateSuccess;
     }
 
     @AuraEnabled(Cacheable=true)

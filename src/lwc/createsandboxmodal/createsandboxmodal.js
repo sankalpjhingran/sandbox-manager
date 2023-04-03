@@ -14,6 +14,26 @@ export default class Createsandboxmodal extends LightningModal {
         AutoActivate: false
     };
 
+    @api
+    licenseTypes = [
+        {
+            label: "Developer",
+            value: "DEVELOPER"
+        },
+        {
+            label: "Developer Pro",
+            value: "DEVELOPER_PRO"
+        },
+        {
+            label: "Partial",
+            value: "PARTIAL"
+        },
+        {
+            label: "Full",
+            value: "FULL"
+        },
+    ];
+
     handleChange(event) {
         console.log(event.target.name, event.target.value);
         const { name, value } = event.target;

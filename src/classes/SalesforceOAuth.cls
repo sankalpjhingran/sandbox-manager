@@ -26,7 +26,8 @@ public with sharing class SalesforceOAuth {
                                                     .withSecurityToken(prodOrgSetting.Security_Token__c)
                                                     .build();
 
-        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(authorizeOrg(prodOrgInstance).getBody());
+        HttpResponse authResponse = authorizeOrg(prodOrgInstance);
+        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(authResponse.getBody());
         this.sessionId = (String) responseMap.get('access_token');
         this.instanceUrl = (String) responseMap.get('instance_url');
 

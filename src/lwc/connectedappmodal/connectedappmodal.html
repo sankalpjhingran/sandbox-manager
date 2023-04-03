@@ -1,0 +1,25 @@
+<!--
+ - Created by sankalp.jhingran on 3/19/23.
+ -->
+
+<!-- Connectedappmodal -->
+<template>
+    <lightning-modal-header label={label}></lightning-modal-header>
+    <lightning-modal-body>
+        <form>
+            <div class="slds-box slds-theme_default">
+                <lightning-input disabled="true" name="Connected App" label="Connected App" type="text" value="SandboxAdmin"></lightning-input>
+                <lightning-input required="true" onchange={handleChange} name="clientId" label="Consumer Key(Client Id)" type="password" value={connectedAppDetails.clientId}></lightning-input>
+                <lightning-input required="true" onchange={handleChange} name="clientSecret" label="Consumer Secret(Client Secret)" type="password" value={connectedAppDetails.clientSecret}></lightning-input>
+            </div>
+        </form>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col" style="text-align: right;">
+                <lightning-button class="slds-m-left_x-small" variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                <lightning-button class="slds-m-left_x-small" variant="brand" label="Save" onclick={handleSave}></lightning-button>
+            </div>
+        </div>
+    </lightning-modal-footer>
+</template>

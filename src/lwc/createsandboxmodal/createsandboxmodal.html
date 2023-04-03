@@ -8,8 +8,16 @@
     <lightning-modal-body>
         <form>
             <div class="slds-box slds-theme_default">
-                <lightning-input onchange={handleChange} name="apexClassId" label="Apex Class" type="text" value={sandboxInfo.apexClassId}></lightning-input>
+                <lightning-combobox onchange={handleChange} name="liscenseType" label="Liscence Type" options={licenseTypes} validity=""></lightning-combobox>
+
+                <!-- default-record-id='0052y000001PmqDAAS' -->
+                <c-lookup icon-name="standard:user"
+                                     s-object-api-name="ApexClass"
+                                     label="Apex Class"
+                                     onlookupupdate={handleChange}
+                                     placeholder="type here..."></c-lookup>
                 <lightning-input onclick={handleChange} name="autoActivate" label="Auto Activate" type="checkbox" value={sandboxInfo.autoActivate}></lightning-input>
+                
             </div>
         </form>
         <!--{content}-->
